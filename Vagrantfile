@@ -10,18 +10,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  # Every Vagrant virtual environment requires a box to build off of.
-  # config.vm.box = "base"
-  # config.vm.box = "precise64"
-
   # config.vm.synced_folder "./app", "/var/www"
 
-  custom_ip = "192.168.1.22"
-  config.vm.network "private_network", ip: custom_ip
+  config.vm.network "private_network", ip: "172.17.0.2"
+  config.ssh.port = "22"
 
   config.vm.provider "docker" do |d|
     # d.build_dir = "."
     d.image = "webapp"
+    d.ports = << "80:80" # host:container
     # d.has_ssh = true
   end
 
@@ -42,9 +39,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
   # config.ssh.forward_agent = true
-
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
 end
