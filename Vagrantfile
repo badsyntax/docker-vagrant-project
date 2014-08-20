@@ -12,14 +12,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # config.vm.synced_folder "./app", "/var/www"
 
-  config.vm.network "private_network", ip: "172.17.0.2"
-  config.ssh.port = "22"
+  # config.vm.network "private_network", ip: "172.17.0.3"
+
+  config.ssh.username = "root"
+  config.ssh.password = "pass"
 
   config.vm.provider "docker" do |d|
-    # d.build_dir = "."
-    d.image = "webapp"
-    d.ports = << "80:80" # host:container
-    # d.has_ssh = true
+    d.build_dir = "."
+    # d.image = "badsyntax/webapp"
+    d.has_ssh = true
   end
 
   # Create a forwarded port mapping which allows access to a specific port

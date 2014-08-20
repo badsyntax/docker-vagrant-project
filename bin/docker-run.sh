@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo docker run -d -p 8080:80 -p 2222:22 webapp
+sudo docker run -p 22 -p 80 -d badsyntax/webapp
